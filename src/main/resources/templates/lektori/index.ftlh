@@ -9,33 +9,32 @@
 <div class="container">
     [#include '/_common/header.ftlh']
 
-    <table class="table">
-        <thead>
-        <tr>
-            <th scope="col">Jméno a příjmení</th>
-            <th scope="col">Role</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>Víla Amálka</td>
-            <td><i class="las la-bell"></i> workshopistka</td>
-        </tr>
-        <tr>
-            <td>Sněhurka</td>
-            <td><i class="las la-graduation-cap"></i> lektor</td>
-        </tr>
-        <tr>
-            <td>Rákosníček</td>
-            <td><i class="las la-laptop-code"></i> kouč</td>
-        </tr>
-        <tr>
-            <td>Popelka</td>
-            <td><i class="las la-laptop-code"></i> kouč</td>
-        </tr>
-        </tbody>
-    </table>
-
+    [#list lektori]
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Jméno a příjmení</th>
+                <th scope="col">Role</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            [#items as lektor]
+                <tr>
+                    <td>${lektor?counter}</td>
+                    <td>${lektor.jmeno} ${lektor.prijmeni}</td>
+                    <td><i class="las la-bell"></i> ${lektor.role}</td>
+                    <td><a href="/lektori/detail/${lektor?index}" class="btn btn-primary">Detail</a></td>
+                </tr>
+            [/#items]
+            </tbody>
+        </table>
+    [#else]
+        <div>
+            <em>Seznam lektorů je prázdný.</em>
+        </div>
+    [/#list]
 </div>
 </body>
 </html>
